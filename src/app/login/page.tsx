@@ -1,9 +1,16 @@
 'use client'
 import { signIn } from "next-auth/react"
 import { SiGoogle } from "@icons-pack/react-simple-icons"
-import { User, Lock } from "lucide-react"
+import { User, Lock, Eye, EyeOff } from "lucide-react"
+import { useState } from "react"
 
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false)
+
+  function handleShowPassword() {
+    setShowPassword(state => !state)
+  }
+
   async function onSubmit(provider: string) {
     await signIn("google", {
       callbackUrl: "/"
@@ -12,8 +19,6 @@ export default function Login() {
 
   return (
     <main className="flex-1 flex items-center justify-center">
-
-
       <div className="rounded-lg p-1">
 
         <div className="
@@ -81,9 +86,16 @@ export default function Login() {
                     <input
                       id="password-input"
                       className="flex-1 text-sm bg-transparent text-zinc-400 placeholder-zinc-400 focus:outline-none"
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       placeholder='Insert password'
                     />
+                    <button>
+                    {showPassword ?
+                    <EyeOff className="text-zinc-400 h-5" onClick={handleShowPassword} />
+                    :
+                    <Eye className="text-zinc-400 h-5" onClick={handleShowPassword} />
+                    }
+                    </button>
                   </span>
                 </div>
               </div>
