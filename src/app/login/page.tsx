@@ -13,7 +13,7 @@ export default function Login() {
 
   async function onSubmit(provider: string) {
     await signIn("google", {
-      callbackUrl: "/"
+      callbackUrl: "/admin"
     })
   }
 
