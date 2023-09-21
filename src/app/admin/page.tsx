@@ -6,8 +6,7 @@ export default function Admin() {
 
   return (
     <>
-      Signed in as {session?.user?.name} <br />
-      <button onClick={() => signOut()}>Sign out</button>
+    <h1>ADMIN</h1>
     </>
   )
 }

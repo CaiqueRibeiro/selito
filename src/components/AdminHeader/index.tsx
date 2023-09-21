@@ -1,5 +1,14 @@
 'use client'
 import { useSession, signOut } from 'next-auth/react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
 export function AdminHeader() {
   const { data: session } = useSession()
 
@@ -10,10 +19,20 @@ export function AdminHeader() {
           <span className='font-bold text-4xl'>SELITO</span>
         </div>
 
-        <button className="flex items-center justify-center gap-4">
-          <span className=''>{session?.user?.name}</span>
-          <img className="rounded-full h-12 w-12 bg-red-600" src={session?.user?.image} alt="User Image" />
-        </button>
+        <DropdownMenu>
+          <div className='flex items-center justify-center gap-4 border-none'>
+            <span className=''>{session?.user?.name}</span>
+            <DropdownMenuTrigger className='border-none active:border-none'>
+              <img className="rounded-full h-12 w-12 bg-white border-none" src={session?.user?.image || ""} alt="User Image" />
+            </DropdownMenuTrigger>
+          </div>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem onClick={async () => signOut()}>Sign Out</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   )
