@@ -2,19 +2,35 @@
 import { signIn } from "next-auth/react"
 import { SiGoogle } from "@icons-pack/react-simple-icons"
 import { User, Lock, Eye, EyeOff } from "lucide-react"
-import { useState } from "react"
+import { useRef, useState } from "react"
+
+type SignInObjectProps = {
+  callbackUrl: string
+  username?: string
+  password?: string
+}
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
+
+  const username = useRef('')
+  const password = useRef('')
 
   function handleShowPassword() {
     setShowPassword(state => !state)
   }
 
   async function onSubmit(provider: string) {
-    await signIn("google", {
+    const signInObject: SignInObjectProps = {
       callbackUrl: "/admin"
-    })
+    }
+
+    if(provider === "credentials") {
+      signInObject.username = username.current
+      signInObject.password = password.current
+    }
+    
+    await signIn(provider, signInObject)
   }
 
   return (
@@ -90,11 +106,11 @@ export default function Login() {
                       placeholder='Insert password'
                     />
                     <button>
-                    {showPassword ?
-                    <EyeOff className="text-zinc-400 h-5" onClick={handleShowPassword} />
-                    :
-                    <Eye className="text-zinc-400 h-5" onClick={handleShowPassword} />
-                    }
+                      {showPassword ?
+                        <EyeOff className="text-zinc-400 h-5" onClick={handleShowPassword} />
+                        :
+                        <Eye className="text-zinc-400 h-5" onClick={handleShowPassword} />
+                      }
                     </button>
                   </span>
                 </div>
@@ -120,7 +136,7 @@ export default function Login() {
           hover:to-fuchsia-800
           duration-1000
           "
-              onClick={async () => alert("MOCK")}>
+              onClick={async () => await onSubmit("credentials")}>
               Sign In
             </button>
           </div>

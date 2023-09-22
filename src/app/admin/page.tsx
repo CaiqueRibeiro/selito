@@ -7,6 +7,7 @@ export default function Admin() {
   return (
     <>
     <h1>ADMIN</h1>
+    <span>{JSON.stringify(session)}</span>
     </>
   )
 }
