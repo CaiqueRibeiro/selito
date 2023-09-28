@@ -22,7 +22,7 @@ export default function Login() {
 
   async function onSubmit(provider: string) {
     const signInObject: SignInObjectProps = {
-      callbackUrl: "/admin"
+      callbackUrl: "/"
     }
 
     if(provider === "credentials") {

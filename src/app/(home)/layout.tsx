@@ -1,4 +1,4 @@
-import { AdminHeader } from '@/components/AdminHeader'
+import { Header } from '@/components/Header'
 import type { Metadata } from 'next'
 import React from 'react'
 
@@ -14,7 +14,7 @@ interface AdminProps {
 export default function AdminLayout({ children }: AdminProps) {
   return (
     <div className='flex flex-1 flex-col'>
-      <AdminHeader />
+      <Header />
       {children}
     </div>
   )
