@@ -14,7 +14,7 @@ export function Header() {
   const { data: session } = useSession()
 
   return (
-    <div className="flex items-center justify-center h-20 border-b border-slate-200 border-opacity-10 sticky py-2 text-slate-300 font-semibold">
+    <div className="sticky top-0 z-10 flex items-center justify-center h-20 bg-violet-700 py-2 text-slate-300 font-semibold">
       {session ?
         <div className="w-full max-w-[1280px] flex align-center justify-between">
           <div className='flex items-center justify-center'>

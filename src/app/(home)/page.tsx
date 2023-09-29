@@ -22,15 +22,12 @@ export default function Home() {
     }
   })
 
-
-  const { data: session } = useSession()
-
   return (
-    <main className="flex-1 flex flex-col items-center justify-start w-screen gap-8 py-10 px-4">
-      <section className="keen-slider flex w-full max-w-[1280px] flex-col gap-4">
+    <main className="flex-1 flex flex-col items-center justify-start gap-8 mt-8">
+      <section className="keen-slider max-w-[1280px] flex-col gap-4">
         <h1 className="text-zinc-50 text-4xl">Highlights</h1>
         <div ref={firstSliderRef} className="keen-slider flex w-full min-h-[400px]">
-          <Link href={`/product`} key={1} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-teal-600 to-indigo-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
+          <Link href={`/product/1`} key={1} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-purple-950 to-violet-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
             <Image src={camiseta} width={520} height={480} alt="" className="object-cover" />
             <footer className="
           absolute
@@ -56,7 +53,7 @@ export default function Home() {
           </Link>
 
 
-          <Link href={`/product`} key={2} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-teal-600 to-indigo-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
+          <Link href={`/product/2`} key={2} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-purple-950 to-violet-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
             <Image src={camiseta} width={520} height={480} alt="" className="object-cover" />
             <footer className="
           absolute
@@ -81,7 +78,7 @@ export default function Home() {
             </footer>
           </Link>
 
-          <Link href={`/product`} key={3} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-teal-600 to-indigo-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
+          <Link href={`/product/3`} key={3} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-purple-950 to-violet-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
             <Image src={camiseta} width={520} height={480} alt="" className="object-cover" />
             <footer className="
           absolute
@@ -106,7 +103,7 @@ export default function Home() {
             </footer>
           </Link>
 
-          <Link href={`/product`} key={4} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-teal-600 to-indigo-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
+          <Link href={`/product/4`} key={4} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-purple-950 to-violet-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
             <Image src={camiseta} width={520} height={480} alt="" className="object-cover" />
             <footer className="
           absolute
@@ -133,11 +130,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="keen-slider flex w-full max-w-[1280px] flex-col gap-4">
-        <h1 className="text-zinc-50 text-4xl">Clothes</h1>
-
+      <section className="keen-slider max-w-[1280px] flex-col gap-4">
+        <h1 className="text-zinc-50 text-4xl">Highlights</h1>
         <div ref={secondSliderRef} className="keen-slider flex w-full min-h-[400px]">
-          <Link href={`/product`} key={1} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-teal-600 to-indigo-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
+          <Link href={`/product/1`} key={1} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-purple-950 to-violet-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
             <Image src={camiseta} width={520} height={480} alt="" className="object-cover" />
             <footer className="
           absolute
@@ -163,7 +159,7 @@ export default function Home() {
           </Link>
 
 
-          <Link href={`/product`} key={2} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-teal-600 to-indigo-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
+          <Link href={`/product/2`} key={2} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-purple-950 to-violet-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
             <Image src={camiseta} width={520} height={480} alt="" className="object-cover" />
             <footer className="
           absolute
@@ -188,7 +184,7 @@ export default function Home() {
             </footer>
           </Link>
 
-          <Link href={`/product`} key={3} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-teal-600 to-indigo-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
+          <Link href={`/product/3`} key={3} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-purple-950 to-violet-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
             <Image src={camiseta} width={520} height={480} alt="" className="object-cover" />
             <footer className="
           absolute
@@ -213,7 +209,7 @@ export default function Home() {
             </footer>
           </Link>
 
-          <Link href={`/product`} key={4} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-teal-600 to-indigo-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
+          <Link href={`/product/4`} key={4} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-purple-950 to-violet-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
             <Image src={camiseta} width={520} height={480} alt="" className="object-cover" />
             <footer className="
           absolute
