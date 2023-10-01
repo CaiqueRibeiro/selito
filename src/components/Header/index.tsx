@@ -1,5 +1,6 @@
 'use client'
 import { useSession, signOut, signIn } from 'next-auth/react'
+import Link from 'next/link'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +19,7 @@ export function Header() {
       {session ?
         <div className="w-full max-w-[1280px] flex align-center justify-between">
           <div className='flex items-center justify-center'>
-            <span className='font-bold text-4xl'>SELITO</span>
+          <Link href={`/`} className='font-bold text-4xl'>SELITO</Link>
           </div>
 
           <DropdownMenu>
@@ -41,7 +42,7 @@ export function Header() {
 
         <div className="w-full max-w-[1280px] flex align-center justify-between">
           <div className='flex items-center justify-center'>
-            <span className='font-bold text-4xl'>SELITO</span>
+            <Link href={`/`} className='font-bold text-4xl'>SELITO</Link>
           </div>
 
           <DropdownMenu>
