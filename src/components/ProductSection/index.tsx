@@ -4,10 +4,12 @@ import Stripe from "stripe";
 
 interface ProductSectionProps {
   section: string;
+  category: string;
 }
 
-export default async function ProductSection({ section }: ProductSectionProps) {
-  const response = await stripe.products.list({
+export default async function ProductSection({ section, category }: ProductSectionProps) {
+  const response = await stripe.products.search({
+    query: `active:\'true\' AND metadata[\'category\']:\'${category}\'`,
     expand: ['data.default_price']
   })
 
