@@ -8,6 +8,7 @@ type SignInObjectProps = {
   callbackUrl: string
   username?: string
   password?: string
+  redirect: boolean
 }
 
 export default function Login() {
@@ -22,7 +23,8 @@ export default function Login() {
 
   async function onSubmit(provider: string) {
     const signInObject: SignInObjectProps = {
-      callbackUrl: "/"
+      callbackUrl: "/",
+      redirect: false
     }
 
     if(provider === "credentials") {
