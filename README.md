@@ -1,34 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🌐 Selito - Fullstack Ecommerce
 
-## Getting Started
+Ecommerce built to fully in Typescript to make sells simple
 
-First, run the development server:
+## Specs
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+|     | Specs                                                                                                                |
+| --- | -------------------------------------------------------------------------------------------------------------------- |
+| ✨  | **Next.js** The most fresh technology to frontend built with React.                                             |
+| 🔓  | **Next Auth** Easy, flexible and secure authentication for Next.js                    |
+| 🧙🏼‍♀️  | **TypeScript** typed programming language that builds on JavaScript.                                                                                          |
+| 🌬️   | **Tailwind** A utility-first CSS framework for building fast and powerful interfaces.|
+| 💸  | **Stripe** A simple and modern sells plataform |
+| 💸  | **PostgreSQL** Relational database used worldwide |
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Live demo
+https://selito.vercel.app/login
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+|     | Features                                                                                                             |
+| --- | -------------------------------------------------------------------------------------------------------------------- |
+| ✅  | User login and register                                     |
+| ✅  | Products list in dashboard                                                     |
+| ✅  | Products details                                           |
+| ✅  | Checkout in stripe (only test platform in demo)                                                                          |
