@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions, Session, User } from "next-auth"
+import NextAuth, { NextAuthOptions, Session } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 
@@ -77,6 +77,6 @@ const authOptions: NextAuthOptions = {
   }
 }
 
-const handler: NextAuthOptions = NextAuth(authOptions)
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }

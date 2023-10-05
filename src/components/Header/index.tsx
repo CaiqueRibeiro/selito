@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { User2Icon } from 'lucide-react'
+import Image from 'next/image'
 
 export function Header() {
   const { data: session } = useSession()
@@ -26,7 +27,7 @@ export function Header() {
             <div className='flex items-center justify-center gap-4 border-none'>
               <span className=''>{session?.user?.name}</span>
               <DropdownMenuTrigger className='border-none active:border-none'>
-                <img className="rounded-full h-12 w-12 bg-white border-none" src={session?.user?.image || ""} alt="User Image" />
+                <Image className="rounded-full h-12 w-12 bg-white border-none" src={session?.user?.image || ""} alt="User Image" />
               </DropdownMenuTrigger>
             </div>
             <DropdownMenuContent>

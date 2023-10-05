@@ -1,11 +1,9 @@
 import { stripe } from "@/lib/stripe"
-import { NextRequest, NextResponse } from "next/server"
+import { NextRequest } from "next/server"
 
 interface CheckoutRequest extends NextRequest {
   payment_id: string
 }
-
-
 
 async function createCheckout(request: CheckoutRequest) {
   const { payment_id, quantity } = await request.json()
