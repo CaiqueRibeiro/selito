@@ -27,7 +27,7 @@ export function Header() {
             <div className='flex items-center justify-center gap-4 border-none'>
               <span className=''>{session?.user?.name}</span>
               <DropdownMenuTrigger className='border-none active:border-none'>
-                <Image className="rounded-full h-12 w-12 bg-white border-none" src={session?.user?.image || ""} alt="User Image" />
+                <Image className="rounded-full h-12 w-12 bg-white border-none" src={session?.user?.image || ""} width={48} height={48} alt="User Image" />
               </DropdownMenuTrigger>
             </div>
             <DropdownMenuContent>

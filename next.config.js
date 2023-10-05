@@ -20,7 +20,8 @@ module.exports = (phase) => {
 
   const images = {
     domains: [
-      'files.stripe.com'
+      'files.stripe.com',
+      'lh3.googleusercontent.com'
     ]
   }
 
