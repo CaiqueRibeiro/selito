@@ -13,7 +13,7 @@ module.exports = (phase) => {
   const env = {
     NEXT_PUBLIC_APP_URL: (() => {
       if (isDev) return "http://localhost:3000";
-      if (isProd) return "http://localhost:3000";
+      if (isProd) return "https://selito.vercel.app";
       return "NEXT_PUBLIC_AUTH_DOMAIN:not (isDev,isProd)";
     })(),
   }
