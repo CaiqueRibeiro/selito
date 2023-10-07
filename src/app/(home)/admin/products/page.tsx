@@ -21,7 +21,7 @@ export default function ProductsList() {
                 id="email-input"
                 className="flex-1 text-sm bg-transparent text-zinc-400 placeholder-zinc-400 focus:outline-none"
                 type="text"
-                placeholder='Insert email'
+                placeholder='Search by name'
               />
             </span>
           </div>
