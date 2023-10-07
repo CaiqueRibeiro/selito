@@ -1,6 +1,6 @@
 # 🌐 Selito - Fullstack Ecommerce
 
-Ecommerce built to fully in Typescript to make sells simple
+Ecommerce built fully in Typescript to make sells simple
 
 ## Specs
 
@@ -11,7 +11,7 @@ Ecommerce built to fully in Typescript to make sells simple
 | 🧙🏼‍♀️  | **TypeScript** typed programming language that builds on JavaScript.                                                                                          |
 | 🌬️   | **Tailwind** A utility-first CSS framework for building fast and powerful interfaces.|
 | 💸  | **Stripe** A simple and modern sells plataform |
-| 💸  | **PostgreSQL** Relational database used worldwide |
+| 🐘  | **PostgreSQL** Relational database used worldwide |
 
 ## Live demo
 https://selito.vercel.app/login
