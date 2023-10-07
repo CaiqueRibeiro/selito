@@ -1,5 +1,6 @@
 'use client'
 import { useSession, signOut, signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import {
   DropdownMenu,
@@ -14,14 +15,16 @@ import Image from 'next/image'
 
 export function Header() {
   const { data: session } = useSession()
+  const { push } = useRouter();
 
   return (
     <div className="sticky top-0 z-10 flex items-center justify-center h-20 bg-violet-700 py-2 text-slate-300 font-semibold">
-      {session ?
-        <div className="w-full max-w-[1280px] flex align-center justify-between px-6">
-          <div className='flex items-center justify-center'>
+      <div className="w-full max-w-[1280px] flex align-center justify-between px-6">
+        <div className='flex items-center justify-center'>
           <Link href={`/`} className='font-bold text-4xl'>SELITO</Link>
-          </div>
+        </div>
+
+        {session ?
 
           <DropdownMenu>
             <div className='flex items-center justify-center gap-4 border-none'>
@@ -33,18 +36,12 @@ export function Header() {
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem onClick={async () => push('/admin')}>Profile</DropdownMenuItem>
               <DropdownMenuItem onClick={async () => signOut()}>Sign Out</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
 
-        :
-
-        <div className="w-full max-w-[1280px] flex align-center justify-between px-6">
-          <div className='flex items-center justify-center'>
-            <Link href={`/`} className='font-bold text-4xl'>SELITO</Link>
-          </div>
+          :
 
           <DropdownMenu>
             <div className='flex items-center justify-center gap-4 border-none'>
@@ -54,14 +51,11 @@ export function Header() {
               </DropdownMenuTrigger>
             </div>
             <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem onClick={async () => signIn("google", { callbackUrl: "/"})}>Sign In</DropdownMenuItem>
+              <DropdownMenuItem onClick={async () => signIn("google", { callbackUrl: "/" })}>Sign In</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
-      }
+        }
+      </div>
     </div>
   )
 }
