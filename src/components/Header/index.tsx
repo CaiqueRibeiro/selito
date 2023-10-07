@@ -36,7 +36,7 @@ export function Header() {
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={async () => push('/admin')}>Profile</DropdownMenuItem>
+              <DropdownMenuItem onClick={async () => push('/admin')}>Manage Store</DropdownMenuItem>
               <DropdownMenuItem onClick={async () => signOut()}>Sign Out</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
