@@ -8,24 +8,18 @@ interface ProductSectionProps {
 }
 
 export default async function ProductSection({ section, category }: ProductSectionProps) {
-  const response = await stripe.products.search({
-    query: `active:\'true\' AND metadata[\'category\']:\'${category}\'`,
-    expand: ['data.default_price']
-  })
-
-  const products = response.data.map(product => {
-    const price = product.default_price as Stripe.Price
-
-    return {
-      id: product.id,
-      name: product.name,
-      imageUrl: product.images[0],
-      price: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      }).format(price.unit_amount as number / 100)
+  const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/products?category=${category}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
     }
   })
+
+  let products = []
+  if (response.ok) {
+    const { products: receivedProducts } = await response.json()
+    products = receivedProducts
+  }
 
   return (
     <section className="keen-slider max-w-[1280px] flex-col gap-4">
