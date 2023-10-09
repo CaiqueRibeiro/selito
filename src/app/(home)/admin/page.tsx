@@ -1,7 +1,7 @@
 'use client'
 import { useSession } from 'next-auth/react'
 import { RectangleCard } from '@/components/RetangleCard'
-import { ShoppingBasket, ShoppingBasketIcon } from 'lucide-react'
+import { ShoppingBasketIcon } from 'lucide-react'
 
 
 export default function Admin() {

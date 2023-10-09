@@ -1,8 +1,9 @@
 'use client'
 import { useSession } from 'next-auth/react'
 import { Search } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { ChangeEventHandler, useEffect, useState } from 'react'
 import ProductsTable from '@/components/ProductsTable'
+import NewProductModal from '@/components/NewProductModal'
 
 interface Product {
   id: string;
@@ -17,7 +18,6 @@ interface Category {
 }
 
 export default function ProductsList() {
-  const { data: session } = useSession()
   const [products, setProducts] = useState<Product[]>([])
   const [categories, setCategories] = useState<Category[]>([
     { value: '', name: 'All' },
@@ -25,6 +25,18 @@ export default function ProductsList() {
     { value: 'Clothes', name: 'Clothes' }
   ])
   const [chosenCategory, setChosenCategory] = useState<string>('')
+  const [showModal, setShowModal] = useState<boolean>(false)
+
+  const { data: session } = useSession()
+
+  function handleOpenProductModal() {
+    setShowModal(true)
+  }
+
+  function handleCloseProductModal() {
+    setShowModal(false)
+  }
+
 
   useEffect(() => {
     async function getProduct() {
@@ -44,12 +56,13 @@ export default function ProductsList() {
     getProduct()
   }, [chosenCategory])
 
-  function handleChooseCategory(element:any) {
+  function handleChooseCategory(element: any) {
     setChosenCategory(element.target.value)
   }
 
   return (
     <main className="flex-1 flex flex-col items-center justify-start gap-8 mt-8 px-8">
+      <NewProductModal show={showModal} hideModal={handleCloseProductModal} />
       <div className="w-full max-w-[1280px] flex flex-col">
 
         <div className="flex items-center justify-between gap-7">
@@ -70,6 +83,10 @@ export default function ProductsList() {
               <option value={category.value} key={category.name}>{category.name}</option>
             ))}
           </select>
+
+          <button onClick={handleOpenProductModal} className="bg-cyan-600 text-zinc-50 rounded-md p-2.5">
+            New Product
+          </button>
         </div>
 
         <ProductsTable products={products} />
