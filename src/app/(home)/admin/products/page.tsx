@@ -37,6 +37,9 @@ export default function ProductsList() {
     setShowModal(false)
   }
 
+  function handleChooseCategory(element: any) {
+    setChosenCategory(element.target.value)
+  }
 
   useEffect(() => {
     async function getProduct() {
@@ -55,10 +58,6 @@ export default function ProductsList() {
 
     getProduct()
   }, [chosenCategory])
-
-  function handleChooseCategory(element: any) {
-    setChosenCategory(element.target.value)
-  }
 
   return (
     <main className="flex-1 flex flex-col items-center justify-start gap-8 mt-8 px-8">
