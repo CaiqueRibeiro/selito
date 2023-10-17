@@ -12,7 +12,8 @@ export default async function ProductSection({ section, category }: ProductSecti
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-    }
+    },
+    next: { revalidate: 30 }
   })
 
   let products = []

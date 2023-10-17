@@ -21,8 +21,8 @@ export default function ProductsList() {
   const [products, setProducts] = useState<Product[]>([])
   const [categories, setCategories] = useState<Category[]>([
     { value: '', name: 'All' },
-    { value: 'Highlights', name: 'Highlights' },
-    { value: 'Clothes', name: 'Clothes' }
+    { value: 'highlights', name: 'Highlights' },
+    { value: 'clothes', name: 'Clothes' }
   ])
   const [chosenCategory, setChosenCategory] = useState<string>('')
   const [showModal, setShowModal] = useState<boolean>(false)
