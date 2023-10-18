@@ -10,7 +10,7 @@ interface NewProductModalProps {
 
 export default function NewProductModal({ show, hideModal }: NewProductModalProps) {
   const [productCreated, setProductCreated] = useState<boolean>(false)
-  let timeoutId: number
+  let timeoutId: any
 
   function handleInnerClick(e: React.MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
