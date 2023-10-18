@@ -1,17 +1,38 @@
 import { X } from "lucide-react";
 import ProductInput from "../ProductInput";
+import { useEffect, useState } from "react";
+import { SuccessIndicator } from "../SuccessIndicator";
 
 interface NewProductModalProps {
   show: boolean
   hideModal: () => void
-  product?: any
 }
 
-export default function NewProductModal({ show, product, hideModal }: NewProductModalProps) {
-  const handleInnerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+export default function NewProductModal({ show, hideModal }: NewProductModalProps) {
+  const [productCreated, setProductCreated] = useState<boolean>(false)
+  let timeoutId: number
+
+  function handleInnerClick(e: React.MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
     hideModal()
-  };
+  }
+
+  function handleProductCreated() {
+    setProductCreated(true)
+
+    timeoutId = setTimeout(() => {
+      setProductCreated(false)
+    }, 2000)
+  }
+
+    useEffect(() => {
+      return () => {
+        // Clear the timeout when the component unmounts
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+      };
+    }, [])
 
   return (
     <div
@@ -21,7 +42,12 @@ export default function NewProductModal({ show, product, hideModal }: NewProduct
         <div  className="cursor-pointer z-90 absolute top-2 right-2" onClick={handleInnerClick}>
           <X className="text-zinc-400 hover:text-violet-700" size={24} />
         </div>
-        <ProductInput />
+        {
+          productCreated ?
+          <SuccessIndicator />
+          :
+          <ProductInput handleProductCreated={handleProductCreated} />
+        }
       </div>
     </div>
   )

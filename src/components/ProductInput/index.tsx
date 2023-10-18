@@ -6,7 +6,11 @@ interface Category {
   name: string
 }
 
-export default function ProductInput() {
+interface ProductInputProps {
+  handleProductCreated: () => void
+}
+
+export default function ProductInput({ handleProductCreated }: ProductInputProps) {
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [categories, setCategories] = useState<Category[]>([
     { value: 'highlights', name: 'Highlights' },
@@ -71,6 +75,7 @@ export default function ProductInput() {
     }
 
     setIsSending(false)
+    handleProductCreated()
   }
 
 
