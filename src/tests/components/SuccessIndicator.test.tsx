@@ -6,6 +6,9 @@ describe('SuccessIndicator test', () => {
   it('should show title', () => {
     render(<SuccessIndicator />)
 
-    expect(screen.getByRole('main')).toBeDefined()
+    const mainElement = screen.getByRole('main')
+
+    expect(mainElement).toBeDefined()
+    expect(mainElement.childElementCount).toBe(1)
   })
 })
