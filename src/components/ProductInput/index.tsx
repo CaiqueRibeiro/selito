@@ -1,5 +1,6 @@
 import { DollarSign, FileImage, ShoppingBasket } from "lucide-react"
 import { ChangeEvent, useMemo, useRef, useState } from "react"
+import Image from "next/image"
 
 interface Category {
   value: string
@@ -78,6 +79,10 @@ export default function ProductInput({ handleProductCreated }: ProductInputProps
     handleProductCreated()
   }
 
+  // needs it to use Blob URL preview in next/image
+  const customImgLoader = ({ src }: { src: string }) => {
+    return `${src}`
+  }
 
   return (
     <form className="flex flex-col md:flex-row items-center gap-4 flex-1 overflow-y-scroll" onSubmit={handleSubmit}>
@@ -86,9 +91,13 @@ export default function ProductInput({ handleProductCreated }: ProductInputProps
           htmlFor="product-image"
           className="relative border flex rounded-md cursor-pointer border-dashed text-sm flex-col gap-2 items-center justify-center text-muted-foreground hover:bg-primary/5 w-full aspect-square">
           {previewURL ? (
-            <img
+            <Image
+              loader={customImgLoader}
               src={previewURL}
-              className="" />
+              className=""
+              alt="Product preview"
+              fill={true}
+            />
           ) : (
             <>
               <FileImage className="w-4 h-4" />

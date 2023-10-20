@@ -22,7 +22,7 @@ module.exports = (phase) => {
     domains: [
       'files.stripe.com',
       'lh3.googleusercontent.com',
-      'images.unsplash.com'
+      'images.unsplash.com',
     ]
   }
 

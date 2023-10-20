@@ -17,7 +17,7 @@ export default function ProductCheckout({ product }: ProductCheckoutProps) {
   const [quantity, setQuantity] = useState<number>(1)
 
   async function getCheckoutLink() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/stripe`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/stripe/order`, {
       method: "POST",
       body: JSON.stringify({ payment_id: product.paymentId, quantity })
     })
