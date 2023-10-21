@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { SuccessIndicator } from '../../components/SuccessIndicator'
+import { SuccessOrErrorIndicator } from '../../components/SuccessOrErrorIndicator'
 
-describe('SuccessIndicator test', () => {
+describe('SuccessOrErrorIndicator test', () => {
   it('should show title', () => {
-    render(<SuccessIndicator />)
+    render(<SuccessOrErrorIndicator success={true} />)
 
     const mainElement = screen.getByRole('main')
 

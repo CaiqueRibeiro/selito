@@ -1,7 +1,7 @@
 import { X } from "lucide-react";
 import ProductInput from "../ProductInput";
 import { useEffect, useState } from "react";
-import { SuccessIndicator } from "../SuccessIndicator";
+import { SuccessOrErrorIndicator } from "../SuccessOrErrorIndicator";
 
 interface NewProductModalProps {
   show: boolean
@@ -10,6 +10,8 @@ interface NewProductModalProps {
 
 export default function NewProductModal({ show, hideModal }: NewProductModalProps) {
   const [productCreated, setProductCreated] = useState<boolean>(false)
+  const [creationSuccess, setCreationSuccess] = useState<boolean>(false)
+
   let timeoutId: any
 
   function handleInnerClick(e: React.MouseEvent<HTMLDivElement>) {
@@ -17,11 +19,18 @@ export default function NewProductModal({ show, hideModal }: NewProductModalProp
     hideModal()
   }
 
-  function handleProductCreated() {
+  function handleProductCreated(success: boolean) {
+    if(success) {
+      setCreationSuccess(true)
+    } else {
+      setCreationSuccess(false)
+    }
+
     setProductCreated(true)
 
     timeoutId = setTimeout(() => {
       setProductCreated(false)
+      setCreationSuccess(false)
     }, 2000)
   }
 
@@ -44,7 +53,7 @@ export default function NewProductModal({ show, hideModal }: NewProductModalProp
         </div>
         {
           productCreated ?
-          <SuccessIndicator />
+          <SuccessOrErrorIndicator success={creationSuccess} />
           :
           <ProductInput handleProductCreated={handleProductCreated} />
         }
