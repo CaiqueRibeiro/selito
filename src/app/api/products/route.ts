@@ -17,7 +17,8 @@ async function getProducts(request: ListProductsRequest) {
     })
   } else {
     response = await stripe.products.list({
-      expand: ['data.default_price']
+      expand: ['data.default_price'],
+      limit: 100
     })
   }
 
@@ -28,6 +29,7 @@ async function getProducts(request: ListProductsRequest) {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
+      active: product.active,
       price: new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
@@ -82,7 +84,7 @@ async function createProduct(request: CreateProductRequest) {
     },
     metadata: {
       category: category!
-    },
+    }
   } as Stripe.ProductCreateParams
 
   if(imageUrl) {
@@ -94,4 +96,37 @@ async function createProduct(request: CreateProductRequest) {
   return new Response(JSON.stringify({ product }))
 }
 
-export { getProducts as GET, createProduct as POST }
+interface InactivateProductRequest extends NextRequest {
+  product_id: string
+}
+
+async function inactivateProduct(request: InactivateProductRequest) {
+  const productId = request.nextUrl.searchParams.get("product_id")
+
+  if(!productId) {
+    return new Response(JSON.stringify({ error: 'Product ID not informed' }), { status: 400 })
+  }
+
+  const product = await stripe.products.update(productId, { active: false })
+
+  if(!product) {
+    return new Response(JSON.stringify({ error: 'It was not possible to inactivate product' }), { status: 500 })
+  }
+
+  const price = product.default_price as Stripe.Price
+
+  const output = {
+    id: product.id,
+    name: product.name,
+    imageUrl: product.images[0],
+    active: product.active,
+    price: new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(price.unit_amount as number / 100)
+  }
+
+  return new Response(JSON.stringify({ message: 'Product inactivated', product: output }))
+}
+
+export { getProducts as GET, createProduct as POST, inactivateProduct as DELETE }

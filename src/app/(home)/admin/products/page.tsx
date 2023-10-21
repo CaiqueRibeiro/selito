@@ -6,10 +6,11 @@ import ProductsTable from '@/components/ProductsTable'
 import NewProductModal from '@/components/NewProductModal'
 
 interface Product {
-  id: string;
-  name: string;
-  imageUrl: string;
-  price: string;
+  id: string
+  name: string
+  imageUrl: string
+  price: string
+  active: boolean
 }
 
 interface Category {
@@ -27,7 +28,13 @@ export default function ProductsList() {
   const [chosenCategory, setChosenCategory] = useState<string>('')
   const [showModal, setShowModal] = useState<boolean>(false)
 
-  const { data: session } = useSession()
+  function handleUpdateProducts(product: Product) {
+    setProducts(products => {
+      const productIndex = products.findIndex(item => item.id === product.id)
+      products[productIndex] = product
+      return products
+    })
+  }
 
   function handleOpenProductModal() {
     setShowModal(true)
@@ -47,7 +54,8 @@ export default function ProductsList() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-        }
+        },
+        cache: 'no-cache'
       })
 
       if (response.ok) {
@@ -88,7 +96,7 @@ export default function ProductsList() {
           </button>
         </div>
 
-        <ProductsTable products={products} />
+        <ProductsTable products={products} updateProducts={handleUpdateProducts} />
       </div>
     </main>
   )

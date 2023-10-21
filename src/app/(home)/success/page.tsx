@@ -40,7 +40,6 @@ interface PaymentInfos {
 
 async function Success({ searchParams }: SuccessProps) {
   const sessionId = searchParams.session_id
-  console.log(sessionId)
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/stripe/order?session_id=${sessionId}`, {
     method: "GET",

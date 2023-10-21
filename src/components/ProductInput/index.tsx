@@ -8,7 +8,7 @@ interface Category {
 }
 
 interface ProductInputProps {
-  handleProductCreated: () => void
+  handleProductCreated: (success: boolean) => void
 }
 
 export default function ProductInput({ handleProductCreated }: ProductInputProps) {
@@ -71,12 +71,16 @@ export default function ProductInput({ handleProductCreated }: ProductInputProps
       body: body
     })
 
+    console.log(response)
+
     if (response.ok) {
       const result = await response.json()
+      handleProductCreated(true)
+    } else {
+      handleProductCreated(false)
     }
 
     setIsSending(false)
-    handleProductCreated()
   }
 
   // needs it to use Blob URL preview in next/image
