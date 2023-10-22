@@ -4,6 +4,7 @@ import { Search } from 'lucide-react'
 import { ChangeEventHandler, useEffect, useState } from 'react'
 import ProductsTable from '@/components/ProductsTable'
 import NewProductModal from '@/components/NewProductModal'
+import NewCategoryModal from '@/components/NewCategoryModal'
 
 interface Product {
   id: string
@@ -26,7 +27,16 @@ export default function ProductsList() {
     { value: 'clothes', name: 'Clothes' }
   ])
   const [chosenCategory, setChosenCategory] = useState<string>('')
-  const [showModal, setShowModal] = useState<boolean>(false)
+  const [showCategoryModal, setShowCategoryModal] = useState<boolean>(false)
+  const [showProductModal, setShowProductModal] = useState<boolean>(false)
+
+  function handleOpenCategoryModal() {
+    setShowCategoryModal(true)
+  }
+
+  function handleCloseCategoryModal() {
+    setShowCategoryModal(false)
+  }
 
   function handleUpdateProducts(product: Product) {
     setProducts(products => {
@@ -37,11 +47,11 @@ export default function ProductsList() {
   }
 
   function handleOpenProductModal() {
-    setShowModal(true)
+    setShowProductModal(true)
   }
 
   function handleCloseProductModal() {
-    setShowModal(false)
+    setShowProductModal(false)
   }
 
   function handleChooseCategory(element: any) {
@@ -69,7 +79,8 @@ export default function ProductsList() {
 
   return (
     <main className="flex-1 flex flex-col items-center justify-start gap-8 mt-8 px-8">
-      <NewProductModal show={showModal} hideModal={handleCloseProductModal} />
+      <NewCategoryModal show={showCategoryModal} hideModal={handleCloseCategoryModal} />
+      <NewProductModal show={showProductModal} hideModal={handleCloseProductModal} />
       <div className="w-full max-w-[1280px] flex flex-col">
 
         <div className="flex items-center justify-between gap-7">
@@ -85,13 +96,17 @@ export default function ProductsList() {
             </span>
           </div>
 
-          <select id="countries" value={chosenCategory} onChange={handleChooseCategory} className="group bg-violet-700 text-zinc-50 text-sm rounded-md w-1/5 p-3">
+          <select id="countries" value={chosenCategory} onChange={handleChooseCategory} className="group bg-violet-700 text-zinc-50 text-sm rounded-sm w-1/5 p-3">
             {categories.map(category => (
               <option value={category.value} key={category.name}>{category.name}</option>
             ))}
           </select>
 
-          <button onClick={handleOpenProductModal} className="bg-cyan-600 text-zinc-50 rounded-md p-2.5">
+          <button onClick={handleOpenCategoryModal} className="bg-orange-500 text-zinc-50 rounded-sm p-2.5 hover:bg-orange-600">
+            New Category
+          </button>
+
+          <button onClick={handleOpenProductModal} className="bg-cyan-600 text-zinc-50 rounded-sm p-2.5 hover:bg-cyan-700">
             New Product
           </button>
         </div>
