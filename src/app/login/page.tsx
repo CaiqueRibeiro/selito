@@ -3,6 +3,7 @@ import { signIn } from "next-auth/react"
 import { SiGoogle } from "@icons-pack/react-simple-icons"
 import { User, Lock, Eye, EyeOff } from "lucide-react"
 import { useRef, useState } from "react"
+import ParticleCanvas from "@/components/ParticleCanvas"
 
 type SignInObjectProps = {
   callbackUrl: string
@@ -37,6 +38,7 @@ export default function Login() {
 
   return (
     <main className="flex-1 flex items-center justify-center">
+      <ParticleCanvas />
       <div className="rounded-lg p-1">
 
         <div className="
