@@ -55,7 +55,7 @@ export default function NewProductModal({ show, hideModal }: NewProductModalProp
           productCreated ?
           <SuccessOrErrorIndicator success={creationSuccess} />
           :
-          <ProductInput handleProductCreated={handleProductCreated} />
+          <ProductInput handleProductAction={handleProductCreated} />
         }
       </div>
     </div>

@@ -8,10 +8,10 @@ interface Category {
 }
 
 interface ProductInputProps {
-  handleProductCreated: (success: boolean) => void
+  handleProductAction: (success: boolean) => void
 }
 
-export default function ProductInput({ handleProductCreated }: ProductInputProps) {
+export default function ProductInput({ handleProductAction }: ProductInputProps) {
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [categories, setCategories] = useState<Category[]>([
     { value: 'highlights', name: 'Highlights' },
@@ -71,13 +71,11 @@ export default function ProductInput({ handleProductCreated }: ProductInputProps
       body: body
     })
 
-    console.log(response)
-
     if (response.ok) {
       const result = await response.json()
-      handleProductCreated(true)
+      handleProductAction(true)
     } else {
-      handleProductCreated(false)
+      handleProductAction(false)
     }
 
     setIsSending(false)
