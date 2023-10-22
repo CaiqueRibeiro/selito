@@ -29,22 +29,23 @@ interface Options {
 
 const ParticleCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const w = typeof window !== 'undefined' ? window.outerWidth : 0
-  const h = typeof window !== 'undefined' ? window.outerHeight : 0
-  const particles: Particle[] = []
-  const options: Options = {
-    particleColor: "rgba(255,255,255)",
-    lineColor: "rgba(0,181,255)",
-    particleAmount: 80,
-    defaultRadius: 0,
-    variantRadius: 1,
-    defaultSpeed: 1,
-    variantSpeed: 1,
-    linkRadius: 250,
-  }
-  const rgb = options.lineColor.match(/\d+/g)
+
 
   useEffect(() => {
+    const w = typeof window !== 'undefined' ? window.outerWidth : 0
+    const h = typeof window !== 'undefined' ? window.outerHeight : 0
+    const particles: Particle[] = []
+    const options: Options = {
+      particleColor: "rgba(255,255,255)",
+      lineColor: "rgba(0,181,255)",
+      particleAmount: 80,
+      defaultRadius: 0,
+      variantRadius: 1,
+      defaultSpeed: 1,
+      variantSpeed: 1,
+      linkRadius: 250,
+    }
+    const rgb = options.lineColor.match(/\d+/g)
     const canvas = canvasRef.current
     const ctx = canvas?.getContext("2d")
 
