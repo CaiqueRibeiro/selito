@@ -1,5 +1,4 @@
 import { X } from "lucide-react";
-import ProductInput from "../ProductInput";
 import { useEffect, useState } from "react";
 import { SuccessOrErrorIndicator } from "../SuccessOrErrorIndicator";
 import CategoryInput from "../CategoryInput";
@@ -7,10 +6,11 @@ import CategoryInput from "../CategoryInput";
 interface NewProductModalProps {
   show: boolean
   hideModal: () => void
+  categoryCreated: boolean
+  setCategoryCreated: (state: boolean) => void
 }
 
-export default function NewCategoryModal({ show, hideModal }: NewProductModalProps) {
-  const [categoryCreated, setCategoryCreated] = useState<boolean>(false)
+export default function NewCategoryModal({ show, hideModal, categoryCreated, setCategoryCreated }: NewProductModalProps) {
   const [creationSuccess, setCreationSuccess] = useState<boolean>(false)
 
   let timeoutId: any

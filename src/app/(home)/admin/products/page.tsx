@@ -14,6 +14,16 @@ interface Product {
   active: boolean
 }
 
+interface CategoryResponse {
+  categories: {
+    id: string
+    name: string
+    description: string
+    createdAt: Date
+    updatedAt: Date
+  }[]
+}
+
 interface Category {
   value: string
   name: string
@@ -21,12 +31,9 @@ interface Category {
 
 export default function ProductsList() {
   const [products, setProducts] = useState<Product[]>([])
-  const [categories, setCategories] = useState<Category[]>([
-    { value: '', name: 'All' },
-    { value: 'highlights', name: 'Highlights' },
-    { value: 'clothes', name: 'Clothes' }
-  ])
+  const [categories, setCategories] = useState<Category[]>([])
   const [chosenCategory, setChosenCategory] = useState<string>('')
+  const [categoryCreated, setCategoryCreated] = useState<boolean>(false)
   const [showCategoryModal, setShowCategoryModal] = useState<boolean>(false)
   const [showProductModal, setShowProductModal] = useState<boolean>(false)
 
@@ -59,6 +66,29 @@ export default function ProductsList() {
   }
 
   useEffect(() => {
+    async function getCategories() {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/categories`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: 'no-cache'
+      })
+
+      if (response.ok) {
+        const { categories } = await response.json() as CategoryResponse
+        const categoriesFormatted = categories.map(category => ({
+          value: category.name.toLowerCase(),
+          name: category.name
+        }))
+        setCategories(categoriesFormatted)
+      }
+    }
+
+    getCategories()
+  }, [categoryCreated])
+
+  useEffect(() => {
     async function getProduct() {
       const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/products?category=${chosenCategory}`, {
         method: "GET",
@@ -79,7 +109,12 @@ export default function ProductsList() {
 
   return (
     <main className="flex-1 flex flex-col items-center justify-start gap-8 mt-8 px-8">
-      <NewCategoryModal show={showCategoryModal} hideModal={handleCloseCategoryModal} />
+      <NewCategoryModal
+        show={showCategoryModal}
+        hideModal={handleCloseCategoryModal}
+        categoryCreated={categoryCreated}
+        setCategoryCreated={setCategoryCreated}
+      />
       <NewProductModal show={showProductModal} hideModal={handleCloseProductModal} />
       <div className="w-full max-w-[1280px] flex flex-col">
 
