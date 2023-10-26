@@ -83,12 +83,13 @@ model Category {
 }
 
 model Sale {
-  id        String     @id @default(cuid())
-  userId    String
-  user      User       @relation(fields: [userId], references: [id])
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  SaleItems SaleItem[]
+  id                String     @id @default(cuid())
+  userId            String
+  user              User       @relation(fields: [userId], references: [id])
+  checkoutSessionId String
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  SaleItems         SaleItem[]
 }
 
 model SaleItem {
