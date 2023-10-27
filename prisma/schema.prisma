@@ -57,8 +57,9 @@ model Product {
   name         String
   description  String
   price        Float
-  imageUrl     String
+  imageUrl     String?
   category     String
+  active       Boolean        @default(true)
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
   ProductStock ProductStock[]

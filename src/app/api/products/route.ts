@@ -2,6 +2,7 @@ import { stripe } from "@/lib/stripe"
 import { randomUUID } from "crypto"
 import { NextRequest } from "next/server"
 import Stripe from "stripe"
+import { prisma } from "../../../../db/prisma"
 
 interface ListProductsRequest extends NextRequest { }
 
@@ -92,6 +93,19 @@ async function createProduct(request: CreateProductRequest) {
   }
 
   const product = await stripe.products.create(input)
+
+  await prisma.product.create({
+    data: {
+      id: product.id,
+      name: name,
+      description: description,
+      category: category,
+      imageUrl: imageUrl,
+      active: product.active,
+      price: Math.ceil(price * 100),
+      createdAt: new Date()
+    }
+  })
 
   return new Response(JSON.stringify({ product }))
 }
