@@ -3,8 +3,15 @@ import ProductCarousel from "../ProductCarousel"
 import Stripe from "stripe";
 
 interface ProductSectionProps {
-  section: string;
-  category: string;
+  section: string
+  category: string
+}
+
+interface Product {
+  id: string
+  name: string
+  imageUrl: string
+  price: string
 }
 
 export default async function ProductSection({ section, category }: ProductSectionProps) {
@@ -16,16 +23,21 @@ export default async function ProductSection({ section, category }: ProductSecti
     next: { revalidate: 30 }
   })
 
-  let products = []
+  let products: Product[] = []
   if (response.ok) {
     const { products: receivedProducts } = await response.json()
     products = receivedProducts
   }
 
   return (
-    <section className="keen-slider max-w-[1280px] flex-col gap-4">
-      <h1 className="text-zinc-50 text-4xl">{section.toUpperCase()}</h1>
-      <ProductCarousel products={products} />
-    </section>
+    products.length > 0 ?
+      (
+        <section className="keen-slider max-w-[1280px] flex-col gap-4">
+          <h1 className="text-zinc-50 text-4xl">{section.toUpperCase()}</h1>
+          <ProductCarousel products={products} />
+        </section>
+      )
+      :
+      <></>
   )
 }
