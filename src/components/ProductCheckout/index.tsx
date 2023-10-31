@@ -1,13 +1,14 @@
 'use client'
 import Image from "next/image"
 import { ChangeEvent, useState } from "react"
+import { AddToCartButton } from "../AddToCartButton";
 
 interface ProductCheckoutProps {
   product: {
     id: string;
     name: string;
     imageUrl: string;
-    price: string;
+    price: number;
     paymentId: string;
     description: string | null;
   },
@@ -42,7 +43,10 @@ export default function ProductCheckout({ product }: ProductCheckoutProps) {
         <div className="flex flex-col flex-1 items-center justify-around">
           <h3 className="text-zinc-50 text-3xl font-bold">{product.name}</h3>
           <div className="flex flex-col items-center justify-center gap-8 md:w-96">
-            <h1 className="text-zinc-50 text-6xl font-bold">{product.price}</h1>
+            <h1 className="text-zinc-50 text-6xl font-bold">{product.price.toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            })}</h1>
             <div className="flex gap-4">
               <label htmlFor="quantity" className="text-xl text-zinc-50">Quantity</label>
               <input
@@ -56,12 +60,16 @@ export default function ProductCheckout({ product }: ProductCheckoutProps) {
                 value={quantity}
                 onChange={handleChangeQuantity}
                 onKeyDown={e => e.preventDefault()}
-                />
+              />
 
             </div>
-            <button onClick={getCheckoutLink} className="self-stretch flex items-center justify-center gap-4 rounded-sm py-2 font-semibold text-zinc-800 bg-violet-500 transition ease-in-out hover:text-zinc-50 hover:bg-violet-900 duration-300">
-              Buy
-            </button>
+
+            <div className="flex flex-col self-stretch gap-2">
+              <AddToCartButton product={{...product, quantity }} />
+              <button onClick={getCheckoutLink} className="self-stretch flex items-center justify-center gap-4 rounded-sm py-2 font-semibold text-zinc-800 bg-violet-500 transition ease-in-out hover:text-zinc-50 hover:bg-violet-900 duration-300">
+                Buy
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -8,8 +8,6 @@ interface UpdateStockRequest extends NextRequest {}
 async function updateStock(request: UpdateStockRequest) {
   const { product_id, quantity } = await request.json()
 
-  console.log(product_id, quantity)
-
   const stock = await prisma.productStock.create({
     data: {
       id: randomUUID(),

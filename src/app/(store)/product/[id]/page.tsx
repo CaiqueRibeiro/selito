@@ -15,10 +15,7 @@ export default async function Product({ params }: { params: { id: string } }) {
     id: response.id,
     name: response.name,
     imageUrl: response.images[0],
-    price: new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(price.unit_amount as number / 100),
+    price: price.unit_amount ? price.unit_amount / 100 : 0,
     paymentId: price.id,
     description: response.description
   }

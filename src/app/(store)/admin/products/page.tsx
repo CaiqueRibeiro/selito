@@ -101,7 +101,6 @@ export default function ProductsList() {
 
       if (response.ok) {
         const { products } = await response.json()
-        console.log(products)
         setProducts(products)
       }
     }

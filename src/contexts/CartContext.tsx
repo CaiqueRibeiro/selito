@@ -6,6 +6,7 @@ interface CartItem {
   productId: string
   productName: string
   productImage: string
+  productPrice: number
   quantity: number
 }
 
@@ -25,12 +26,12 @@ export default function CartProvider({ children }: { children: ReactNode }) {
 
         if(productAlreadyInCart) {
           return prevState
-            .map(item => item.productId === itemToAdd.productId ? { ...item, quantity: item.quantity + 1 }
+            .map(item => item.productId === itemToAdd.productId ? { ...item, quantity: item.quantity + itemToAdd.quantity }
             : item
             )
         }
 
-        return [...prevState, { ...itemToAdd, quantity: 1 }]
+        return [...prevState, { ...itemToAdd, quantity: itemToAdd.quantity }]
       })
   }
 
