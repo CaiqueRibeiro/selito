@@ -29,6 +29,8 @@ export function Header() {
 
           <CartWidget />
 
+          <div className="w-px h-5 bg-zinc-500" />
+
           {session ?
 
             <DropdownMenu>
