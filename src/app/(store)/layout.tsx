@@ -1,4 +1,5 @@
 import { Header } from '@/components/Header'
+import CartProvider from '@/contexts/CartContext'
 import type { Metadata } from 'next'
 import React from 'react'
 
@@ -13,9 +14,11 @@ interface AdminProps {
 
 export default function AdminLayout({ children }: AdminProps) {
   return (
-    <div className='flex flex-1 flex-col'>
-      <Header />
-      {children}
-    </div>
+    <CartProvider>
+      <div className='flex flex-1 flex-col'>
+        <Header />
+        {children}
+      </div>
+    </CartProvider>
   )
 }

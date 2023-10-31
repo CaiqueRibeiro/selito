@@ -1,7 +1,6 @@
 'use client'
-import { useSession } from 'next-auth/react'
 import { Search } from 'lucide-react'
-import { ChangeEventHandler, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ProductsTable from '@/components/ProductsTable'
 import NewProductModal from '@/components/NewProductModal'
 import NewCategoryModal from '@/components/NewCategoryModal'
@@ -11,6 +10,7 @@ interface Product {
   name: string
   imageUrl: string
   price: string
+  quantity: number
   active: boolean
 }
 
@@ -19,6 +19,7 @@ interface CategoryResponse {
     id: string
     name: string
     description: string
+    quantity: number
     createdAt: Date
     updatedAt: Date
   }[]
@@ -32,10 +33,10 @@ interface Category {
 export default function ProductsList() {
   const [products, setProducts] = useState<Product[]>([])
   const [categories, setCategories] = useState<Category[]>([])
+  const [showProductModal, setShowProductModal] = useState<boolean>(false)
   const [chosenCategory, setChosenCategory] = useState<string>('')
   const [categoryCreated, setCategoryCreated] = useState<boolean>(false)
   const [showCategoryModal, setShowCategoryModal] = useState<boolean>(false)
-  const [showProductModal, setShowProductModal] = useState<boolean>(false)
 
   function handleOpenCategoryModal() {
     setShowCategoryModal(true)
@@ -109,13 +110,18 @@ export default function ProductsList() {
 
   return (
     <main className="flex-1 flex flex-col items-center justify-start gap-8 mt-8 px-8">
+
       <NewCategoryModal
         show={showCategoryModal}
         hideModal={handleCloseCategoryModal}
         categoryCreated={categoryCreated}
         setCategoryCreated={setCategoryCreated}
       />
-      <NewProductModal show={showProductModal} hideModal={handleCloseProductModal} />
+      <NewProductModal
+        show={showProductModal}
+        hideModal={handleCloseProductModal}
+      />
+
       <div className="w-full max-w-[1280px] flex flex-col">
 
         <div className="flex items-center justify-between gap-7">

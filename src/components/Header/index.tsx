@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { User2Icon } from 'lucide-react'
 import Image from 'next/image'
+import { CartWidget } from '../CartWidget'
 
 export function Header() {
   const { data: session } = useSession()
@@ -24,37 +25,42 @@ export function Header() {
           <Link href={`/`} className='font-bold text-4xl'>SELITO</Link>
         </div>
 
-        {session ?
+        <div className="flex justify-center items-center gap-8">
 
-          <DropdownMenu>
-            <div className='flex items-center justify-center gap-4 border-none'>
-              <span className=''>{session?.user?.name}</span>
-              <DropdownMenuTrigger className='border-none active:border-none'>
-                <Image className="rounded-full h-12 w-12 bg-white border-none" src={session?.user?.image || ""} width={48} height={48} alt="User Image" />
-              </DropdownMenuTrigger>
-            </div>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={async () => push('/admin')}>Manage Store</DropdownMenuItem>
-              <DropdownMenuItem onClick={async () => signOut()}>Sign Out</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <CartWidget />
 
-          :
+          {session ?
 
-          <DropdownMenu>
-            <div className='flex items-center justify-center gap-4 border-none'>
-              <span className=''>Not logged</span>
-              <DropdownMenuTrigger className='border-none active:border-none'>
-                <User2Icon className="rounded-full h-12 w-12 bg-white border-none" />
-              </DropdownMenuTrigger>
-            </div>
-            <DropdownMenuContent>
-              <DropdownMenuItem onClick={async () => signIn("google", { callbackUrl: "/" })}>Sign In</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        }
+            <DropdownMenu>
+              <div className='flex items-center justify-center gap-4 border-none'>
+                <span className=''>{session?.user?.name}</span>
+                <DropdownMenuTrigger className='border-none active:border-none'>
+                  <Image className="rounded-full h-12 w-12 bg-white border-none" src={session?.user?.image || ""} width={48} height={48} alt="User Image" />
+                </DropdownMenuTrigger>
+              </div>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={async () => push('/admin')}>Manage Store</DropdownMenuItem>
+                <DropdownMenuItem onClick={async () => signOut()}>Sign Out</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            :
+
+            <DropdownMenu>
+              <div className='flex items-center justify-center gap-4 border-none'>
+                <span className=''>Not logged</span>
+                <DropdownMenuTrigger className='border-none active:border-none'>
+                  <User2Icon className="rounded-full h-12 w-12 bg-white border-none" />
+                </DropdownMenuTrigger>
+              </div>
+              <DropdownMenuContent>
+                <DropdownMenuItem onClick={async () => signIn("google", { callbackUrl: "/" })}>Sign In</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          }
+        </div>
       </div>
     </div>
   )

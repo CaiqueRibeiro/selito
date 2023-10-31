@@ -23,14 +23,18 @@ async function getProducts(request: ListProductsRequest) {
     })
   }
 
+  const productStock = await prisma.productStock.findMany()
+
   const products = response.data.map(product => {
     const price = product.default_price as Stripe.Price
+    const quantity = productStock.find(stock => stock.productId === product.id)?.quantity
 
     return {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
       active: product.active,
+      quantity: quantity ?? 0,
       price: new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
