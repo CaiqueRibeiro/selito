@@ -13,7 +13,7 @@ export interface AddtoCartButtonProps {
 }
 
 export function AddToCartButton({ product }: AddtoCartButtonProps) {
-  const { addToCart, items } = useCart()
+  const { addToCart } = useCart()
 
   function handleProductAddToCart() {
     addToCart({

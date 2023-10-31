@@ -22,7 +22,7 @@ export default function ProductStockInput({ product, handleStockAction }: StockP
 
     const body = {
       product_id: product.id,
-      quantity: quantity
+      quantity: Number(quantity)
     }
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/products/stock`, {
