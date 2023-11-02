@@ -3,15 +3,7 @@ import { BoxIcon, Check, Edit, X } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 import ProductStockModal from '../ProductStockModal'
-
-interface Product {
-  id: string
-  name: string
-  imageUrl: string
-  price: string
-  quantity: number
-  active: boolean
-}
+import { Product } from '@/types/product'
 
 interface Products {
   products: Product[]

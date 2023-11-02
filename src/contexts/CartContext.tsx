@@ -8,6 +8,7 @@ interface CartItem {
   productImage: string
   productPrice: number
   quantity: number
+  paymentId: string
 }
 
 interface CartContextProps {
