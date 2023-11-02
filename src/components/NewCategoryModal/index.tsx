@@ -42,7 +42,7 @@ export default function NewCategoryModal({ show, hideModal, categoryCreated, set
           clearTimeout(timeoutId);
         }
       };
-    }, [])
+    }, [timeoutId])
 
   return (
     <div
