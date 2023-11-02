@@ -1,11 +1,7 @@
 import { DollarSign, FileImage, ShoppingBasket } from "lucide-react"
 import { ChangeEvent, useMemo, useRef, useState } from "react"
 import Image from "next/image"
-
-interface Category {
-  value: string
-  name: string
-}
+import { Category } from "@/types/category"
 
 interface ProductInputProps {
   handleProductAction: (success: boolean) => void
@@ -13,7 +9,7 @@ interface ProductInputProps {
 
 export default function ProductInput({ handleProductAction }: ProductInputProps) {
   const [imageFile, setImageFile] = useState<File | null>(null)
-  const [categories, setCategories] = useState<Category[]>([
+  const [categories, _] = useState<Category[]>([
     { value: 'highlights', name: 'Highlights' },
     { value: 'clothes', name: 'Clothes' }
   ])

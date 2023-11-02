@@ -8,6 +8,12 @@ interface CartItem {
   productImage: string
   productPrice: number
   quantity: number
+  paymentId: string
+}
+
+interface CheckoutItemDetails {
+  price: string,
+  quantity: number
 }
 
 interface CartContextProps {
@@ -16,6 +22,7 @@ interface CartContextProps {
   addToCart: (item: CartItem) => void
   changeQuantity: (productId: string, quantity: number) => void
   removeItem: (productId: string) => void
+  goToCheckoutPage: (product?: CheckoutItemDetails[]) => void
 }
 
 const CartContext = createContext({} as CartContextProps)
@@ -61,13 +68,31 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     setCartItems(newCartItems)
   }
 
+  async function goToCheckoutPage(product?: CheckoutItemDetails[]) {
+    let productDetails = product ? product : cartItems.map(item => {
+      return {
+        price: item.paymentId,
+        quantity: item.quantity
+      }
+    })
+    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/stripe/order`, {
+      method: "POST",
+      body: JSON.stringify({
+        checkout_details: productDetails
+      })
+    })
+    const { url } = await response.json()
+    window.open(url, '_blank')
+  }
+
   return (
     <CartContext.Provider value={{
       items: cartItems,
       totalValue: totalValue,
       addToCart: handleAddToCart,
       changeQuantity,
-      removeItem
+      removeItem,
+      goToCheckoutPage
     }}>
       {children}
     </CartContext.Provider>

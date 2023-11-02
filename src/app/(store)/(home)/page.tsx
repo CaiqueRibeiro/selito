@@ -1,4 +1,5 @@
 import ProductSection from "@/components/ProductSection"
+import { Category } from "@/types/category"
 
 interface CategoryResponse {
   categories: {
@@ -8,11 +9,6 @@ interface CategoryResponse {
     createdAt: Date
     updatedAt: Date
   }[]
-}
-
-interface Category {
-  value: string
-  name: string
 }
 
 export default async function Home() {

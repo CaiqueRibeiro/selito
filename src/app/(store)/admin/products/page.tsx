@@ -4,15 +4,8 @@ import { useEffect, useState } from 'react'
 import ProductsTable from '@/components/ProductsTable'
 import NewProductModal from '@/components/NewProductModal'
 import NewCategoryModal from '@/components/NewCategoryModal'
-
-interface Product {
-  id: string
-  name: string
-  imageUrl: string
-  price: string
-  quantity: number
-  active: boolean
-}
+import { Product } from '@/types/product'
+import { Category } from '@/types/category'
 
 interface CategoryResponse {
   categories: {
@@ -23,11 +16,6 @@ interface CategoryResponse {
     createdAt: Date
     updatedAt: Date
   }[]
-}
-
-interface Category {
-  value: string
-  name: string
 }
 
 export default function ProductsList() {

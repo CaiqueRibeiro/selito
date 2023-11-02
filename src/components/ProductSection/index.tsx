@@ -1,17 +1,9 @@
-import { stripe } from "@/lib/stripe"
 import ProductCarousel from "../ProductCarousel"
-import Stripe from "stripe";
+import { Product } from "@/types/product";
 
 interface ProductSectionProps {
   section: string
   category: string
-}
-
-interface Product {
-  id: string
-  name: string
-  imageUrl: string
-  price: string
 }
 
 export default async function ProductSection({ section, category }: ProductSectionProps) {

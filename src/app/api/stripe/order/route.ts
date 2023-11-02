@@ -2,17 +2,30 @@ import { stripe } from "@/lib/stripe"
 import { NextRequest } from "next/server"
 
 interface CheckoutRequest extends NextRequest {
-  payment_id: string
+  checkout_details: {
+    payment_id: string
+    quantity: number
+  }[]
 }
 
-async function createCheckout(request: CheckoutRequest) {
+async function createCheckout(request: Request) {
+  /*
   const { payment_id, quantity } = await request.json()
-
+  
   const session = await stripe.checkout.sessions.create({
     success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
     line_items: [
       { price: payment_id, quantity },
     ],
+    mode: 'payment',
+  });
+  */
+
+  const { checkout_details } = await request.json() as CheckoutRequest
+  
+  const session = await stripe.checkout.sessions.create({
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+    line_items: checkout_details,
     mode: 'payment',
   });
 

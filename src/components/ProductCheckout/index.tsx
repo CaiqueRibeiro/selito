@@ -2,6 +2,7 @@
 import Image from "next/image"
 import { ChangeEvent, useState } from "react"
 import { AddToCartButton } from "../AddToCartButton";
+import { useCart } from "@/contexts/CartContext";
 
 interface ProductCheckoutProps {
   product: {
@@ -16,16 +17,10 @@ interface ProductCheckoutProps {
 
 export default function ProductCheckout({ product }: ProductCheckoutProps) {
   const [quantity, setQuantity] = useState<number>(1)
+  const { goToCheckoutPage } = useCart()
 
-  async function getCheckoutLink() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/stripe/order`, {
-      method: "POST",
-      body: JSON.stringify({ payment_id: product.paymentId, quantity })
-    })
-
-    const { url } = await response.json()
-
-    window.open(url, '_blank')
+  async function handleCheckout() {
+    goToCheckoutPage([{ price: product.paymentId, quantity }])
   }
 
   function handleChangeQuantity(element: ChangeEvent<HTMLInputElement>) {
@@ -65,8 +60,8 @@ export default function ProductCheckout({ product }: ProductCheckoutProps) {
             </div>
 
             <div className="flex flex-col self-stretch gap-2">
-              <AddToCartButton product={{...product, quantity }} />
-              <button onClick={getCheckoutLink} className="self-stretch flex items-center justify-center gap-4 rounded-sm py-2 font-semibold text-zinc-800 bg-violet-500 transition ease-in-out hover:text-zinc-50 hover:bg-violet-900 duration-300">
+              <AddToCartButton product={{ ...product, quantity }} />
+              <button onClick={handleCheckout} className="self-stretch flex items-center justify-center gap-4 rounded-sm py-2 font-semibold text-zinc-800 bg-violet-500 transition ease-in-out hover:text-zinc-50 hover:bg-violet-900 duration-300">
                 Buy
               </button>
             </div>

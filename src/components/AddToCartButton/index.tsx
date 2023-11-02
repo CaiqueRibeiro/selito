@@ -9,6 +9,7 @@ export interface AddtoCartButtonProps {
     imageUrl: string
     price: number
     quantity: number
+    paymentId: string
   }
 }
 
@@ -22,6 +23,7 @@ export function AddToCartButton({ product }: AddtoCartButtonProps) {
       productName: product.name,
       productPrice: product.price,
       quantity: product.quantity,
+      paymentId: product.paymentId
     })
   }
 
