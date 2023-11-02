@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import React from 'react'
 
 export const metadata: Metadata = {
-  title: 'Selito - Dashboard',
+  title: 'Selito',
   description: 'Next.js Ecommerce',
 }
 
