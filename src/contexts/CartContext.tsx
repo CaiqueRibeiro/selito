@@ -71,6 +71,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   async function goToCheckoutPage(product?: CheckoutItemDetails[]) {
     let productDetails = product ? product : cartItems.map(item => {
       return {
+        product_id: item.productId,
         price: item.paymentId,
         quantity: item.quantity
       }
@@ -78,6 +79,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/stripe/order`, {
       method: "POST",
       body: JSON.stringify({
+        user_id: 'clo20w00s0000mp08tw4q7vnn',
         checkout_details: productDetails
       })
     })

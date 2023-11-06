@@ -1,5 +1,7 @@
+'use client'
+
 import { DollarSign, FileImage, ShoppingBasket } from "lucide-react"
-import { ChangeEvent, useMemo, useRef, useState } from "react"
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react"
 import Image from "next/image"
 import { Category } from "@/types/category"
 
@@ -7,18 +9,50 @@ interface ProductInputProps {
   handleProductAction: (success: boolean) => void
 }
 
+interface CategoryResponse {
+  categories: {
+    id: string
+    name: string
+    description: string
+    quantity: number
+    createdAt: Date
+    updatedAt: Date
+  }[]
+}
+
 export default function ProductInput({ handleProductAction }: ProductInputProps) {
   const [imageFile, setImageFile] = useState<File | null>(null)
-  const [categories, _] = useState<Category[]>([
-    { value: 'highlights', name: 'Highlights' },
-    { value: 'clothes', name: 'Clothes' }
-  ])
-  const [chosenCategory, setChosenCategory] = useState<string>(categories[0].value)
+  const [categories, setCategories] = useState<Category[]>([])
+  const [chosenCategory, setChosenCategory] = useState<string>("")
   const [isSending, setIsSending] = useState<boolean>(false)
 
   const nameRef = useRef<HTMLInputElement>(null)
   const priceRef = useRef<HTMLInputElement>(null)
   const descriptionRef = useRef<HTMLTextAreaElement>(null)
+
+  useEffect(() => {
+    async function getCategories() {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/categories`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: 'no-cache'
+      })
+
+      if (response.ok) {
+        const { categories } = await response.json() as CategoryResponse
+        const categoriesFormatted = categories.map(category => ({
+          value: category.name.toLowerCase(),
+          name: category.name
+        }))
+        setCategories(categoriesFormatted)
+        setChosenCategory(categoriesFormatted[0].value)
+      }
+    }
+
+    getCategories()
+  }, [])
 
   function handleChooseCategory(element: any) {
     setChosenCategory(element.target.value)
