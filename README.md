@@ -24,3 +24,8 @@ https://selito.vercel.app/login
 | ✅  | Products list in dashboard                                                     |
 | ✅  | Products details                                           |
 | ✅  | Checkout in stripe (only test platform in demo)                                                                          |
+| ✅  | Put item in cart                                                                          |
+| ✅  | Admin page                                                                     |
+| ✅  | Register a new item                                                                    |
+| ✅  | Register a category                                                                   |
+| ✅  | Manage stock                                                                      |
