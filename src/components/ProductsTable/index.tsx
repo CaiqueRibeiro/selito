@@ -15,7 +15,7 @@ export default function ProductsTable({ products, updateProducts }: Products) {
   const [showStockModal, setShowStockModal] = useState<boolean>(false)
 
   async function handleInactivateProduct(productId: string) {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/products?product_id=${productId}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/products/${productId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

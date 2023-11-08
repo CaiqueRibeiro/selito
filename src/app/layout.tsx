@@ -4,7 +4,10 @@ import React from 'react'
 import { NextAuthProvider } from '@/components/NextAuthProvider'
 
 export const metadata: Metadata = {
-  title: 'Selito',
+  title: {
+    template: '%s | Selito',
+    default: 'Selito',
+  },
   description: 'Next.js Ecommerce',
 }
 

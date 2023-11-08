@@ -4,5 +4,7 @@ export interface Product {
   imageUrl: string
   price: string
   quantity: number
+  paymentId: string
+  description: string | null
   active: boolean
 }

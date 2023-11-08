@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image"
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { AddToCartButton } from "../AddToCartButton";
 import { useCart } from "@/contexts/CartContext";
 
@@ -10,13 +10,14 @@ interface ProductCheckoutProps {
     name: string;
     imageUrl: string;
     price: number;
+    quantity: number;
     paymentId: string;
     description: string | null;
   },
 }
 
 export default function ProductCheckout({ product }: ProductCheckoutProps) {
-  const [quantity, setQuantity] = useState<number>(1)
+  const [quantity, setQuantity] = useState<number>(product.quantity > 0 ? 1 : 0)
   const { goToCheckoutPage } = useCart()
 
   async function handleCheckout() {
@@ -36,7 +37,11 @@ export default function ProductCheckout({ product }: ProductCheckoutProps) {
         </div>
 
         <div className="flex flex-col flex-1 items-center justify-around">
-          <h3 className="text-zinc-50 text-3xl font-bold">{product.name}</h3>
+          <div className="flex flex-col items-center justify-center">
+            <h3 className="text-zinc-50 text-3xl font-bold">{product.name}</h3>
+            {product.quantity === 0 && <span className="text-sm font-light text-zinc-200 ">Out of stock</span>}
+          </div>
+
           <div className="flex flex-col items-center justify-center gap-8 md:w-96">
             <h1 className="text-zinc-50 text-6xl font-bold">{product.price.toLocaleString('pt-BR', {
               style: 'currency',
@@ -45,13 +50,14 @@ export default function ProductCheckout({ product }: ProductCheckoutProps) {
             <div className="flex gap-4">
               <label htmlFor="quantity" className="text-xl text-zinc-50">Quantity</label>
               <input
+                disabled={product.quantity === 0}
                 className="w-16 rounded-sm outline-none ring-input pl-4"
                 type="number"
                 name="quantity"
                 id="quantity"
                 pattern="[0-9]*"
-                min={1}
-                max={50}
+                min={product.quantity > 0 ? 1 : 0}
+                max={product.quantity}
                 value={quantity}
                 onChange={handleChangeQuantity}
                 onKeyDown={e => e.preventDefault()}
@@ -61,7 +67,10 @@ export default function ProductCheckout({ product }: ProductCheckoutProps) {
 
             <div className="flex flex-col self-stretch gap-2">
               <AddToCartButton product={{ ...product, quantity }} />
-              <button onClick={handleCheckout} className="self-stretch flex items-center justify-center gap-4 rounded-sm py-2 font-semibold text-zinc-800 bg-violet-500 transition ease-in-out hover:text-zinc-50 hover:bg-violet-900 duration-300">
+              <button
+                disabled={product.quantity === 0}
+                onClick={handleCheckout}
+                className="self-stretch flex items-center justify-center gap-4 rounded-sm py-2 font-semibold text-zinc-800 bg-violet-500 transition ease-in-out hover:text-zinc-50 hover:bg-violet-900 duration-300 disabled:bg-gray-500 disabled:text-zinc-800">
                 Buy
               </button>
             </div>

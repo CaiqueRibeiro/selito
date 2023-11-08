@@ -1,24 +1,39 @@
 import ProductCheckout from "@/components/ProductCheckout"
-import { stripe } from "@/lib/stripe"
-import Stripe from "stripe"
+import { Product } from "@/types/product"
+import { Metadata } from "next"
 
-export default async function Product({ params }: { params: { id: string } }) {
-  const productId = params.id
+interface ProductPageProps {
+  params: { id: string }
+}
 
-  const response = await stripe.products.retrieve(productId, {
-    expand: ['default_price']
+async function getProduct(id: string): Promise<any> {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/products/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    next: { revalidate: 30 }
   })
 
-  const price = response.default_price as Stripe.Price
+  const { product } = await response.json()
 
-  const product = {
-    id: response.id,
-    name: response.name,
-    imageUrl: response.images[0],
-    price: price.unit_amount ? price.unit_amount / 100 : 0,
-    paymentId: price.id,
-    description: response.description
+  return product
+}
+
+export async function generateMetadata({
+  params,
+}: ProductPageProps): Promise<Metadata> {
+  const product = await getProduct(params.id)
+  return {
+    title: product.name,
   }
+}
+
+
+export default async function Product({ params }: ProductPageProps) {
+  const productId = params.id
+  const product = await getProduct(productId)
+
 
   return (
     <main className="flex-1 flex flex-col items-center justify-start w-screen gap-8 pt-7">

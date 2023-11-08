@@ -1,5 +1,10 @@
 import ProductSection from "@/components/ProductSection"
 import { Category } from "@/types/category"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: 'Home',
+}
 
 interface CategoryResponse {
   categories: {

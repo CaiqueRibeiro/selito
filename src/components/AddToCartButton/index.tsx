@@ -9,6 +9,7 @@ export interface AddtoCartButtonProps {
     imageUrl: string
     price: number
     quantity: number
+    description: string | null
     paymentId: string
   }
 }
@@ -29,9 +30,10 @@ export function AddToCartButton({ product }: AddtoCartButtonProps) {
 
   return (
     <button
+      disabled={product.quantity === 0}
       type="button"
       onClick={handleProductAddToCart}
-      className="self-stretch flex items-center justify-center gap-4 rounded-sm py-2 font-semibold text-zinc-50 bg-emerald-500 transition ease-in-out  hover:bg-emerald-900 duration-300"
+      className="self-stretch flex items-center justify-center gap-4 rounded-sm py-2 font-semibold text-zinc-50 bg-emerald-500 transition ease-in-out hover:bg-emerald-900 duration-300 disabled:bg-gray-300"
     >
       Adicionar ao carrinho
     </button>

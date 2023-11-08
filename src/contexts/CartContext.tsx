@@ -22,6 +22,7 @@ interface CartContextProps {
   addToCart: (item: CartItem) => void
   changeQuantity: (productId: string, quantity: number) => void
   removeItem: (productId: string) => void
+  clearCart: () => void
   goToCheckoutPage: (product?: CheckoutItemDetails[]) => void
 }
 
@@ -68,6 +69,10 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     setCartItems(newCartItems)
   }
 
+  function clearCart() {
+    setCartItems([])
+  }
+
   async function goToCheckoutPage(product?: CheckoutItemDetails[]) {
     let productDetails = product ? product : cartItems.map(item => {
       return {
@@ -84,6 +89,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       })
     })
     const { url } = await response.json()
+    clearCart()
     window.open(url, '_blank')
   }
 
@@ -94,6 +100,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       addToCart: handleAddToCart,
       changeQuantity,
       removeItem,
+      clearCart,
       goToCheckoutPage
     }}>
       {children}
