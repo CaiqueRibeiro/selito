@@ -12,7 +12,8 @@ interface CartItem {
 }
 
 interface CheckoutItemDetails {
-  price: string,
+  productId: string,
+  paymentId: string,
   quantity: number
 }
 
@@ -23,7 +24,7 @@ interface CartContextProps {
   changeQuantity: (productId: string, quantity: number) => void
   removeItem: (productId: string) => void
   clearCart: () => void
-  goToCheckoutPage: (product?: CheckoutItemDetails[]) => void
+  goToCheckoutPage: (product?: CheckoutItemDetails[]) => Promise<void>
 }
 
 const CartContext = createContext({} as CartContextProps)
@@ -74,7 +75,8 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   }
 
   async function goToCheckoutPage(product?: CheckoutItemDetails[]) {
-    let productDetails = product ? product : cartItems.map(item => {
+    const productsToCheckout = product ?? cartItems
+    let productDetails = productsToCheckout.map(item => {
       return {
         product_id: item.productId,
         price: item.paymentId,
