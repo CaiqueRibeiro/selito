@@ -13,17 +13,20 @@ import {
 import { User2Icon } from 'lucide-react'
 import Image from 'next/image'
 import { CartWidget } from '../CartWidget'
+import { SearchForm } from '../SearchForm'
 
 export function Header() {
   const { data: session } = useSession()
   const { push } = useRouter();
 
   return (
-    <div className="sticky top-0 z-10 flex items-center justify-center h-20 bg-violet-700 py-2 text-slate-300 font-semibold">
+    <div className="sticky top-0 z-10 flex items-center justify-center bg-violet-700 py-2 text-slate-300 font-semibold">
       <div className="w-full max-w-[1280px] flex align-center justify-between px-6">
         <div className='flex items-center justify-center'>
           <Link href={`/`} className='font-bold text-4xl'>SELITO</Link>
         </div>
+
+        <SearchForm />
 
         <div className="flex justify-center items-center gap-8">
 
