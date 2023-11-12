@@ -116,9 +116,4 @@ async function createProduct(request: CreateProductRequest) {
   return new Response(JSON.stringify({ product }))
 }
 
-interface InactivateProductRequest extends NextRequest {
-  product_id: string
-}
-
-
 export { getProducts as GET, createProduct as POST }
