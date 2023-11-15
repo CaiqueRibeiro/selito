@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { SuccessOrErrorIndicator } from "../SuccessOrErrorIndicator";
 import CategoryInput from "../CategoryInput";
 
-interface NewProductModalProps {
+interface NewCategoryModalProps {
   show: boolean
   hideModal: () => void
   categoryCreated: boolean
   setCategoryCreated: (state: boolean) => void
 }
 
-export default function NewCategoryModal({ show, hideModal, categoryCreated, setCategoryCreated }: NewProductModalProps) {
+export default function NewCategoryModal({ show, hideModal, categoryCreated, setCategoryCreated }: NewCategoryModalProps) {
   const [creationSuccess, setCreationSuccess] = useState<boolean>(false)
 
   let timeoutId: any

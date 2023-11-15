@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { SuccessOrErrorIndicator } from "../SuccessOrErrorIndicator";
 import ProductStockInput from "../ProductStockInput";
 
-interface NewProductModalProps {
+interface ProductStockModalProps {
   show: boolean
   product?: any
   hideModal: () => void
 }
 
-export default function ProductStockModal({ show, product, hideModal }: NewProductModalProps) {
+export default function ProductStockModal({ show, product, hideModal }: ProductStockModalProps) {
   const [stockUpdated, setStockUpdated] = useState<boolean>(false)
   const [creationSuccess, setCreationSuccess] = useState<boolean>(false)
 
