@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <NextAuthProvider session={session}>
-        <body className="h-screen bg-gradient-to-r from-zinc-900 from-30% to-violet-950 to-95% flex justify-center">
+        <body className="h-screen w-full overflow-x-hidden bg-gradient-to-r from-zinc-900 from-30% to-violet-950 to-95% flex justify-center">
           <div className='flex flex-1'>
             {children}
           </div>

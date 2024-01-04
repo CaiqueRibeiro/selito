@@ -17,7 +17,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
   })
 
   return (
-    <div ref={sliderRef} className="keen-slider flex w-full min-h-[400px]">
+    <div ref={sliderRef} className="keen-slider flex min-h-[400px]">
       {products.map(product => {
         return (
           <Link href={`/product/${product.id}`} key={product.id} className="keen-slider__slide group flex justify-center items-center flex-col bg-gradient-to-b from-purple-950 to-violet-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">

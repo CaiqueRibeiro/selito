@@ -2,13 +2,15 @@ import { X } from "lucide-react";
 import ProductInput from "../ProductInput";
 import { useEffect, useState } from "react";
 import { SuccessOrErrorIndicator } from "../SuccessOrErrorIndicator";
+import { Product } from "@/types/product";
 
 interface NewProductModalProps {
   show: boolean
   hideModal: () => void
+  product?: Product
 }
 
-export default function NewProductModal({ show, hideModal }: NewProductModalProps) {
+export default function NewProductModal({ show, hideModal, product }: NewProductModalProps) {
   const [productCreated, setProductCreated] = useState<boolean>(false)
   const [creationSuccess, setCreationSuccess] = useState<boolean>(false)
 
@@ -55,7 +57,7 @@ export default function NewProductModal({ show, hideModal }: NewProductModalProp
           productCreated ?
           <SuccessOrErrorIndicator success={creationSuccess} />
           :
-          <ProductInput handleProductAction={handleProductCreated} />
+          <ProductInput handleProductAction={handleProductCreated} product={product} />
         }
       </div>
     </div>

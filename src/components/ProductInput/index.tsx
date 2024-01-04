@@ -4,9 +4,11 @@ import { DollarSign, FileImage, ShoppingBasket } from "lucide-react"
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react"
 import Image from "next/image"
 import { Category } from "@/types/category"
+import { Product } from "@/types/product"
 
 interface ProductInputProps {
   handleProductAction: (success: boolean) => void
+  product?: Product
 }
 
 interface CategoryResponse {
@@ -20,10 +22,10 @@ interface CategoryResponse {
   }[]
 }
 
-export default function ProductInput({ handleProductAction }: ProductInputProps) {
+export default function ProductInput({ handleProductAction, product }: ProductInputProps) {
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [categories, setCategories] = useState<Category[]>([])
-  const [chosenCategory, setChosenCategory] = useState<string>("")
+  const [chosenCategory, setChosenCategory] = useState<string>('')
   const [isSending, setIsSending] = useState<boolean>(false)
 
   const nameRef = useRef<HTMLInputElement>(null)
@@ -69,12 +71,16 @@ export default function ProductInput({ handleProductAction }: ProductInputProps)
 
 
   const previewURL = useMemo(() => {
+    if(product) {
+      return product.imageUrl
+    }
+
     if (!imageFile) {
       return null
     }
 
     return URL.createObjectURL(imageFile)
-  }, [imageFile])
+  }, [imageFile, product])
 
   async function handleSubmit(event: any) {
     event.preventDefault()
