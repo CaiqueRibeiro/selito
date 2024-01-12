@@ -20,7 +20,7 @@ export function Header() {
   const { push } = useRouter();
 
   return (
-    <div className="sticky top-0 z-10 flex items-center justify-center bg-violet-700 py-2 text-slate-300 font-semibold">
+    <div className="sticky top-0 z-10 flex items-center justify-center bg-gray-800 py-2 text-slate-300 font-semibold">
       <div className="w-full max-w-[1280px] flex align-center justify-between px-6">
         <div className='flex items-center justify-center'>
           <Link href={`/`} className='font-bold text-4xl'>SELITO</Link>
