@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <NextAuthProvider session={session}>
-        <body className="h-screen flex overflow-hidden bg-gray-900">
+        <body className="h-screen flex overflow-x-hidden bg-gray-900">
           <div className='flex flex-1'>
             {children}
           </div>

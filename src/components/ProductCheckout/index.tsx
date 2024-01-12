@@ -40,7 +40,7 @@ export default function ProductCheckout({ product }: ProductCheckoutProps) {
   return (
     <div className="flex flex-col w-full max-w-[1280px] gap-14 flex-1 border-b border-slate-200 border-opacity-10 p-8">
       <div className="flex gap-6 flex-col lg:flex-row">
-        <div className="flex justify-center items-center flex-col bg-gradient-to-b from-purple-950 to-violet-500 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
+        <div className="flex justify-center items-center flex-col bg-gradient-to-b from-gray-900 to-gray-700 backdrop-blur-lg rounded-lg cursor-pointer relative overflow-hidden">
           <Image src={product.imageUrl} width={520} height={480} alt="" className="object-cover" />
         </div>
 
